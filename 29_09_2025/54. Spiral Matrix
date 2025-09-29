@@ -1,0 +1,47 @@
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ans=new ArrayList<>();
+        int m=matrix.length;
+        int n=matrix[0].length;
+        int minrow=0, mincol=0, maxrow=m-1, maxcol=n-1;
+        int total= m*n;
+        while(total>0)
+        {
+            for(int i=mincol;total>0 && i<=maxcol;i++)
+            {
+                ans.add(matrix[minrow][i]);
+                total--;
+            }
+            minrow++;
+            for(int i=minrow;total>0 && i<=maxrow;i++)
+            {
+                ans.add(matrix[i][maxcol]);
+                total--;
+            }
+            maxcol--;
+            for(int i=maxcol;total>0 && i>=mincol;i--)
+            {
+                ans.add(matrix[maxrow][i]);
+                total--;
+            }
+            maxrow--;
+            for(int i=maxrow;total>0 && i>=minrow;i--)
+            {
+                ans.add(matrix[i][mincol]);
+                total--;
+            }
+            mincol++;
+        }
+        return ans;
+    }
+}
+TC-O(m*n)
+SC-O(1)
+
+Example 1:
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+
+Example 2:
+Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
