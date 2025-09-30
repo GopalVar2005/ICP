@@ -28,8 +28,7 @@ class Solution {
         return false;
     }
 }
-n=s2.length
-TC-O(n)
+TC-O(|s1|+|s2|)
 SC-O(1)
 
 Example 1:
