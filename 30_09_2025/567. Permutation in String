@@ -1,0 +1,43 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int[] s1freq=new int[26];
+        for(int k=0;k<s1.length();k++)
+        {
+            s1freq[s1.charAt(k)-97]++;
+        }
+        int[] s2freq=new int[26];
+        int i=0, j=0;
+        while(j<s2.length())
+        {
+            s2freq[s2.charAt(j)-97]++;
+            if(j-i+1<s1.length())
+            {
+                j++;
+            }
+            else
+            {
+                if(Arrays.equals(s1freq, s2freq))
+                {
+                    return true;
+                }
+                s2freq[s2.charAt(i)-97]--;
+                i++;
+                j++;
+            }
+        }
+        return false;
+    }
+}
+n=s2.length
+TC-O(n)
+SC-O(1)
+
+Example 1:
+
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: s2 contains one permutation of s1 ("ba").
+
+Example 2:
+Input: s1 = "ab", s2 = "eidboaoo"
+Output: false
