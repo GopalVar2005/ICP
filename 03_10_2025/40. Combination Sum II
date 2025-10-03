@@ -1,0 +1,49 @@
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> ans=new ArrayList<>();
+        sum(candidates, 0, 0, target, ans, new ArrayList<>());
+        return ans;
+    }
+    public void sum(int[] nums, int idx, int amount, int target, List<List<Integer>> ans, List<Integer> ll)
+    {
+        if(idx==nums.length && amount==target)
+        {
+            ans.add(new ArrayList<>(ll));
+            return;
+        }
+        if(idx==nums.length)
+        {
+            return;
+        }
+        if(amount+nums[idx]<=target)
+        {
+            ll.add(nums[idx]);
+            sum(nums, idx+1, amount+nums[idx], target, ans, ll);
+            ll.remove(ll.size()-1);
+        }
+        int next=idx+1;
+        while(next<nums.length && nums[next]==nums[idx])next++;
+        sum(nums, next, amount, target, ans, ll);
+    }
+}
+Time Complexity: O(2^n * n) in the worst case
+Space Complexity: O(n) auxiliary, plus O(K * n) for results
+
+Example 1:
+Input: candidates = [10,1,2,7,6,1,5], target = 8
+Output: 
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+
+Example 2:
+Input: candidates = [2,5,2,1,2], target = 5
+Output: 
+[
+[1,2,2],
+[5]
+]
