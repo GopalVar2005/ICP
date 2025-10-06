@@ -1,0 +1,30 @@
+class Solution{
+    public int uniquePaths(int m,int n){
+        int[][] dp=new int[m][n]; 
+        return countPaths(0,0,m,n,dp);
+    }
+    public int countPaths(int cr,int cc,int m,int n,int[][] dp){
+        if(cr==m-1 && cc==n-1)return 1;  //base cases for destination.
+        if(cr>=m || cc>=n)return 0;   //base cases for out of bounds.
+        if(dp[cr][cc]!=0)return dp[cr][cc];
+        dp[cr][cc]=countPaths(cr,cc+1,m,n,dp)+countPaths(cr+1,cc,m,n,dp);
+        return dp[cr][cc];
+    }
+}
+
+| Complexity Type      | Big-O        | Explanation                |
+| -------------------- | ------------ | -------------------------- |
+| **Time Complexity**  | **O(m × n)** | Each cell visited once     |
+| **Space Complexity** | **O(m × n)** | DP array + recursion stack |
+
+Example 1:
+Input: m = 3, n = 7
+Output: 28
+
+Example 2:
+Input: m = 3, n = 2
+Output: 3
+Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Down -> Down
+2. Down -> Down -> Right
+3. Down -> Right -> Down
