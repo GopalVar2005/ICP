@@ -1,0 +1,39 @@
+class Solution {
+    public int strStr(String haystack, String needle) {
+        if(needle.length()>haystack.length())
+        {
+            return -1;
+        }
+        for(int i=0;i<haystack.length();i++)
+        {
+            if(haystack.charAt(i)==needle.charAt(0))
+            {
+                boolean good=true;
+                int idx=0;
+                for(int j=i;j<i+needle.length();j++)
+                {
+                    if(j==haystack.length() || haystack.charAt(j)!=needle.charAt(idx++))
+                    {
+                        good=false;
+                        break;
+                    }
+                }
+                if(good)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+}
+TC-O(haystack.length*needle.length)
+SC-O(1)
+
+class Solution {
+    public int strStr(String haystack, String needle) {
+        return haystack.indexOf(needle);
+    }
+}
+TC-O(haystack.length*needle.length)
+SC-O(1)
