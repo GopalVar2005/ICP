@@ -1,0 +1,19 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n=prices.length;
+        int[] right=new int[n];
+        right[n-1]=-1;
+        for(int i=n-2;i>=0;i--)
+        {
+            right[i]=Math.max(right[i+1], prices[i+1]);
+        }
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            ans=Math.max(ans, right[i]-prices[i]);
+        }
+        return ans;
+    }
+}
+TC-O(N)
+SC-O(N)
