@@ -1,0 +1,61 @@
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        int n=nums.length;
+        boolean one=false;
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]==1)one=true;
+            if(nums[i]<=0 || nums[i]>n)nums[i]=1;
+        }
+        if(!one)
+        {
+            return 1;
+        }
+        for(int i=0;i<n;i++)
+        {
+            int idx=Math.abs(nums[i])-1;
+            if(nums[idx]>0)
+            {
+                nums[idx]*=-1;
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]>0)
+            {
+                return i+1;
+            }
+        }
+        return n+1;
+    }
+}
+TC-O(N)
+SC-O(1)
+
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        int n=nums.length;
+        Arrays.sort(nums);
+        int i=0;
+        while(i<n && nums[i]<=0)
+        {
+            i++;
+        }
+        int ans=1;
+        for(int j=i;j<n;)
+        {
+            if(nums[j]!=ans)
+            {
+                return ans;
+            }
+            while(j<n && nums[j]==ans)
+            {
+                j++;
+            }
+                ans++;
+        }
+        return ans;
+    }
+}
+TC-O(nlogn)
+SC-O(1)
